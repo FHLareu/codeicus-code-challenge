@@ -1,7 +1,7 @@
-# CodeChallenge - FullStack Developer PHP
+# ![Logo](./src/assets/codeicus.png) CodeChallenge - FullStack Developer PHP
 
 En este repositorio se almacenará la resolución del desafio técnico de la empresa [codeicus](http://www.codeicus.com/ "Visitar página oficial") para la evaluación de conocimientos.
-La resolución del primer punto del desafio se desarrollará en este mismo archivo README.md ya que consiste en el análisis de un bloque de código. 
+La resolución del primer punto del desafio se desarrollará en este mismo archivo README.md ya que consiste en el análisis de un bloque de código. La API del punto 4 se encuentra en el siguiente [directorio](./src/assets/)
 
 ## Ejercicio 1
 
@@ -24,3 +24,26 @@ dataType: "json",
 * En la siguiente línea: `$("#msg").html('<p class="success">' + data.result ​"</p>");`, entre `data.result` y `"</p>"` falta un símbolo de suma para que los concatene.
 
 c) El inicio de sesión y la obtención del token podrían realizarse en la misma conexión asincrónica. A la API se le envía los datos de logueo del usuario, verifica su existencia y genera un token que contenga esos datos y lo devuelve. Del lado del cliente, el token se almacena en el localstorage y por cada operación que el usuario realice, se envía la información que corresponda en conjunto a ese token para validar el estado de la sesión del usuario.
+
+## Tecnologías utilizadas
+
+<table>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/FHLareu/Portfolio/blob/master/src/assets/img/visual.png" width="20px" height="20px"/></td>
+            <td><a href="https://code.visualstudio.com/">Visual Studio Code</a></td>
+        </tr>
+        <tr>
+            <td><img src="https://raw.githubusercontent.com/1caruxx/Desarollo_web/master/icon.png" width="20px" height="20px"/></td>
+            <td><a href="https://angular.io/"><b>Angular</b></a></td>
+        </tr>
+        <tr>
+            <td><img src="./src/assets/ng-mat.png" width="20px" height="20px"/></td>
+            <td><a href="https://material.angular.io/"><b>Angular Material</b></a></td>
+        </tr>
+        <tr>
+            <td><img src="./src/assets/moment.png" width="20px" height="20px"/></td>
+            <td><a href="https://momentjs.com/"><b>Moment.js</b></a></td>
+        </tr>
+    </tbody>
+</table>

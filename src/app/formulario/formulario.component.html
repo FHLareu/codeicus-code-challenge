@@ -1,0 +1,157 @@
+
+<!-- #region stepper -->
+<div class="flex stepper">
+    <div class="stepper-child">
+        <span>Paso 1</span>
+        <span>Pedido de mercadería</span>
+    </div>
+    <div class="stepper-child">
+        <span>Paso 2</span>
+        <span>Detalles adicionales</span>
+    </div>
+</div>
+<div class="indicador"></div>
+
+<!-- #endregion -->
+
+<!-- #region formulario pedido -->
+<div class="flex flex-start desaparecer" id="container">
+    <div class="form">
+
+        <h1>Pedido de mercadería</h1>
+
+        <hr class="corto">
+
+        <!-- #region select producto -->
+        <div class="flex">
+            <mat-icon aria-hidden="false">add_shopping_cart</mat-icon>
+            <mat-form-field class="largo">
+                <mat-label>Seleccione un producto</mat-label>
+                <mat-select [(ngModel)]="productoSeleccionado" (selectionChange)="ReestablecerCantidad()">
+                    <ng-container *ngFor="let item of opciones">
+                        <mat-option *ngIf="item.stock > 0" [value]="item">{{item.name}}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="error" id="divProductoError">* Seleccione uno de los productos para continuar.</div>
+        <!-- #endregion -->
+
+        <!-- #region input cantidad -->
+        <div class="flex">
+            <mat-icon aria-hidden="false">exposure_plus_1</mat-icon>
+            <mat-form-field>
+                <mat-label>Seleccione la cantidad</mat-label>
+                <input matInput type="number" min="1" [max]="productoSeleccionado.stock" [(ngModel)]="cantidad"
+                    [disabled]="deshabilitarInputNumber" (input)="OcultarError('divCantidadError')" />
+            </mat-form-field>
+        </div>
+
+        <div class="error" id="divCantidadError">* Ingrese un número mayor a 0 y menor a
+            {{productoSeleccionado.stock + 1}} (stock actual). </div>
+        <!-- #endregion -->
+
+        <div class="flex botones">
+            <button mat-raised-button (click)="AgregarAlPedido()" style="margin-right: 50px;">Añadir al pedido</button>
+            <button mat-raised-button class="naranja" (click)="HacerPedido()">Hacer el pedido</button>
+        </div>
+
+        <div class="error" id="divPedidoError">* Debes añadir al menos un producto al pedido.</div>
+
+    </div>
+
+    <div id="pedido">
+        <h1 style="text-align: center;">Pedido</h1>
+        <hr>
+
+        <div style="background-color: rgba(255, 255, 255, .7);text-align: center;font-size: 24px;padding: 10px;user-select: none;"
+            *ngIf="pedido.length == 0">Todavía no has añadido ningún producto al pedido. Los productos del pedido se
+            irán listando aquí. Más tarde puedes cliquear sobre ellos para quitarlos del pedido.</div>
+
+        <ul>
+
+            <li *ngFor="let item of pedido" (click)="QuitarDelPedido(item)" title="Quitar">
+                <div>{{item.producto.name}}</div>
+                <span>Cantidad: {{item.cantidad}}, Código: {{item.producto.cod}}</span>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- #endregion -->
+
+<!-- #region formulario detalles -->
+<div class="flex detalles desaparecer">
+
+    <div class="form">
+
+        <h1>Detalles adicionales</h1>
+        <div class="error" style="color:black;visibility: visible;">Pedido enviado. Opcionalmente puede completar este
+            formulario con sus datos.</div>
+        <hr class="corto">
+
+        <!-- #region input nombre -->
+        <div class="flex">
+            <mat-icon aria-hidden="false">account_box</mat-icon>
+            <mat-form-field class="largo">
+                <mat-label>Ingrese su nombre y apellido</mat-label>
+                <input matInput type="text" id="txtNombre" (input)="OcultarError('divNombreError')" />
+            </mat-form-field>
+        </div>
+
+        <div class="error" id="divNombreError">* Introduzca nombre y apellido válidos.</div>
+        <!-- #endregion -->
+
+        <!-- #region input documento -->
+        <div class="flex">
+            <mat-icon aria-hidden="false">chrome_reader_mode</mat-icon>
+            <mat-form-field class="largo">
+                <mat-label>Ingrese su documento</mat-label>
+                <input matInput type="text" id="txtDocumento" (input)="OcultarError('divDocumentoError')" />
+            </mat-form-field>
+        </div>
+
+        <div class="error" id="divDocumentoError">* Introduzca un documento válido.</div>
+        <!-- #endregion -->
+
+        <!-- #region input fecha -->
+        <div class="flex">
+            <mat-icon aria-hidden="false">today</mat-icon>
+            <mat-form-field class="largo">
+                <mat-label>Seleccione la fecha estimada de entrega</mat-label>
+                <input matInput [matDatepicker]="picker" [min]="fechaMinima" id="dpFecha" placeholder="DD-MM-AAAA"
+                    (input)="OcultarError('divFechaError')" />
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="error" id="divFechaError">* Introduzca una fecha válida.</div>
+        <!-- #endregion -->
+
+        <!-- #region textarea comentario -->
+        <div class="flex">
+            <mat-icon aria-hidden="false">feedback</mat-icon>
+
+            <mat-form-field class="largo">
+                <mat-label>Deje un comentario</mat-label>
+                <textarea matInput placeholder="Por ejemplo: el producto es frágil, no me encuentro por la mañana, etc."
+                    id="areaComentario" (input)="ContarLetras('areaComentario')"></textarea>
+            </mat-form-field>
+
+        </div>
+
+        <div class="error" id="divComentarioError">{{txtAreaLenght}}/200 caracteres escritos.</div>
+        <!-- #endregion -->
+
+        <div class="flex botones">
+            <button mat-raised-button class="naranja" (click)="Redirigir()">Enviar</button>
+        </div>
+
+    </div>
+</div>
+<!-- #endregion -->

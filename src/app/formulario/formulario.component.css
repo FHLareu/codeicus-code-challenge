@@ -1,0 +1,223 @@
+@keyframes translate {
+    from {
+        transform: translate(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+}
+
+.flex-start {
+    align-items: flex-start !important;
+    justify-content: center !important;
+}
+
+.desaparecer {
+    transition-property: opacity;
+    transition-duration: 1s;
+}
+
+
+/* #region stepper */
+.stepper {
+    background-color: rgb(233, 233, 233);
+    width: 100%;
+}
+
+.stepper-child {
+    width:100%;
+    padding: 15px;
+}
+
+.stepper-child > span:first-child {
+    font-size: 25px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.indicador {
+    height: 3px;
+    background-color: orange;
+    width: 50%;
+    position: relative;
+    transition-duration: .7s;
+    transition-property: left;
+    left: 0%;
+}
+
+/* #endregion */
+
+/* #region formulario */
+.form {
+    position: relative;
+    background-color: white;
+    outline-color: transparent;
+    outline-style: solid;
+    outline-width: 2px;
+    transition-property: outline;
+    transition-duration: .3s;
+    width: 50%;
+    padding: 10px 30px;
+    margin-left: 20px;
+    top: 20px;
+    padding-top: 20px;
+    box-shadow: 3px 3px 12px gray;
+    box-sizing: border-box;
+    display: inline-block;
+    opacity: 1;
+}
+
+.form:hover {
+    outline-color: orange;
+}
+
+.form > *:not(.flex) {
+    margin-bottom: 20px;
+}
+.form > *:first-child {
+    margin-bottom: 10px;
+}
+
+.form > h1 {
+    font-weight: normal;
+    user-select: none;
+    margin-bottom: 25px !important;
+}
+
+hr.corto {
+    width: 25%;
+    margin: 0 0 25px 0 !important;
+}
+
+.botones {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+mat-icon {
+    margin-right: 10px;
+    color: gray;
+    user-select: none;
+}
+
+.largo {
+    width: 100% !important;
+}
+
+.naranja {
+    background-color: orange;
+}
+
+::ng-deep .mat-raised-button {
+    border-radius: 0 !important;
+    padding: 10px !important;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.error {
+    color:red;
+    font-size: 12px;
+    user-select: none;
+    margin-bottom: 20px;
+    visibility: hidden;
+}
+
+#divPedidoError {
+    text-align: center;
+}
+/* #endregion */
+
+/* #region pedido */
+#pedido {
+    width: 50%;
+    margin-left: 50px;
+}
+
+ul {
+    width: 100%;
+    box-shadow: 3px 3px 12px gray;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    background-color: white;
+    height: 70px;
+    transition: .1s;
+    padding-left: 10px;
+    border-bottom: solid 2px orange;
+    border-top: solid 2px orange;
+    margin: -2px 0 -2px 0;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+
+    animation-name: translate;
+    animation-duration: .3s;
+    animation-iteration-count: 1;
+}
+
+li:nth-child(odd) {
+    background-color: rgb(255, 250, 236);
+}
+
+li:first-child {
+    border-top: none;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li:hover {
+    transform: translate(-10px);
+}
+
+li > div {
+    color: orange;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* #endregion */
+
+.detalles {
+    opacity: 0;
+    display: none;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 975px) {
+    #container {
+      display:block;
+    }
+
+    .form {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 50px;
+    }
+
+    #pedido {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .flex.botones {
+        display: block;
+    }
+    ::ng-deep .mat-raised-button {
+        display: block !important;
+        width: 100% !important;
+    }
+}
