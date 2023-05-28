@@ -34,7 +34,7 @@ c) El inicio de sesión y la obtención del token podrían realizarse en la mism
             <td><a href="https://code.visualstudio.com/">Visual Studio Code</a></td>
         </tr>
         <tr>
-            <td><img src="https://raw.githubusercontent.com/1caruxx/Desarollo_web/master/icon.png" width="20px" height="20px"/></td>
+            <td><img src="https://raw.githubusercontent.com/FHLareu/Desarollo_web/master/icon.png" width="20px" height="20px"/></td>
             <td><a href="https://angular.io/"><b>Angular</b></a></td>
         </tr>
         <tr>
